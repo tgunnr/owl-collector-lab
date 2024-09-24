@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static "css/form.css" %}">
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  {% if owl %}
+    <h1>Edit {{ owl.name }}</h1>
+  {% else %}
+    <h1>Add an Owl</h1>
+  {% endif %}
+  <img src="{% static 'images/nerd-owl.png' %}" alt="An owl using a computer"/>
+</div>
+<form action="" method='post' class='form-container'>
+  {% csrf_token %}
+  <table>
+    {{ form.as_table }}
+  </table>
+  <button type="submit" class="btn submit">Submit</button>
+</form>
+{% endblock %}
