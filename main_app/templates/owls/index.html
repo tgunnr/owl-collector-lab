@@ -1,44 +1,43 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% load static %}
 
 {% block head %}
 <link 
-  rel="stylesheet"
-  type="text/css"
-  href="{% static 'css/owls/owl-index.css' %}"
-/>
+  rel="stylesheet" 
+  href="{% static "css/owls/owl-index.css" %}"
+  type="text/css"  
+>
 {% endblock %}
 
 {% block content %}
-
 <section class="page-header">
   <h1>Owl List</h1>
   <img src="{% static 'images/cool-owl.png' %}" alt="A cool owl" />
   <img src="{% static 'images/happy-owl.png' %}" alt="A happy owl" />
-  <img src="{% static 'images/teacup-owl.png' %}" alt="An owl in a teacup" />
+  <img src="{% static 'images/teacup-owl.png' %}" alt="An own in a teacup" />
   <img src="{% static 'images/owl-in-box.png' %}" alt="An owl in a box" />
 </section>
-
 <section class="card-container">
   {% for owl in owls %}
     <div class="card">
-      <div class="card-content">
-        <div class="card-img-container">
-          <img 
-            src="{% static 'images/sk8r-boi-owl.png' %}" 
-            alt="A skater boy owl"
-          >
+      <a href="{% url "owl-detail" owl.id %}">
+        <div class="card-content">
+          <div class="card-img-container">
+            <img 
+              src="{% static 'images/sk8r-boi-owl.png' %}" 
+              alt="A skater boy owl"
+            >
+          </div>
+          <h2 class="card-title">{{ owl.name }}</h2>
+          {% if owl.age > 0 %}
+            <p>A {{ owl.age }} year old {{ owl.breed }}</p>
+          {% else %}
+            <p>A {{ owl.breed }} owlet.</p>
+          {% endif %}
+          <p><small>{{ owl.description }}</small></p>
         </div>
-        <h2 class="card-title">{{ owl.name }}</h2>
-        {% if owl.age > 0 %}
-          <p>A {{ owl.age }} year old {{ owl.breed }}</p>
-        {% else %}
-          <p>A {{ owl.breed }} kitten.</p>
-        {% endif %}
-        <p><small>{{ owl.description }}</small></p>
-      </div>
+      </a>
     </div>
   {% endfor %}
 </section>
-
 {% endblock %}
